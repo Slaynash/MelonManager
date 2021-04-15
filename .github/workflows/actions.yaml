@@ -48,3 +48,53 @@ jobs:
         with:
           name: nodejs_files
           path: out
+
+  pack_windows:
+    runs-on: linux-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Download Electron
+        uses: wei/wget@v1
+        with:
+          args: -O electron.zip https://github.com/electron/electron/releases/download/v12.0.4/electron-v12.0.4-win32-x64.zip
+      - name: Extract Electron
+        uses: montudor/action-zip@v0.1.1
+        with:
+          args: unzip -qq electron.zip -d electron
+
+      - name: copy files
+        run: |
+          cp -R locales/ platform-tools/ electron/
+          mkdir electron/resources/app
+          cp -R index.html style.css res/ electron/resources/app/
+
+      - name: Download dotnet artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: dotnet_files
+          path: electron
+      
+      - name: Download nodejs artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: electron/resources/app/out
+
+      - name: Setup Node.js 14
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+          check-latest: true
+      
+      - name: Restore dependencies (prod)
+        run: npm ci --production
+        working-directory: electron/resources/app
+
+      - name: Upload electron app
+        uses: actions/upload-artifact@v2
+        with:
+          name: windows_build
+          path: electron
+      
+
