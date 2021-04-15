@@ -2,7 +2,7 @@ name: MelonManager
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
 
 jobs:
   build_dotnet:
