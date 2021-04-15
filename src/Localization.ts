@@ -11,7 +11,7 @@ export class Localization {
     public static init(): void {
         this.english = this.objToStrMap(JSON.parse(fs.readFileSync('./locales/en.json', 'utf8')));
 
-        let localCountryCode = 'en'; //remote.app.getLocaleCountryCode().toLowerCase();
+        let localCountryCode = remote.app.getLocaleCountryCode().toLowerCase();
         console.log("Locale: " + localCountryCode);
         if (localCountryCode != 'en' && fs.existsSync(`./locales/${localCountryCode}.json`))
             this.currentLanguage = this.objToStrMap(JSON.parse(fs.readFileSync(`./locales/${localCountryCode}.json`, 'utf8')));
