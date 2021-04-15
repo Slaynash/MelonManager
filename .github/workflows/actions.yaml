@@ -1,0 +1,50 @@
+name: MelonManager
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build_dotnet:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Nuget.exe
+        uses: nuget/setup-nuget@v1
+      - name: Restore packages
+        run: nuget restore MelonManagerUtils/MelonManagerUtils.sln
+
+      - name: Setup MSBuild.exe
+        uses: microsoft/setup-msbuild@v1.0.2
+      - name: Build with MSBuild
+        run: msbuild MelonManagerUtils/MelonManagerUtils.sln -p:Configuration=Release -p:Platform=x64
+
+      - name: Upload dotnet artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: dotnet_files
+          path: MelonManagerUtils/bin/Release
+  
+  build_node:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Node.js 14
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+          check-latest: true
+      - name: Restore dependencies
+        run: npm ci
+      - name: Compile TypeScript
+        run: npx tsc
+
+      - name: Upload nodejs artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: nodejs_files
+          path: out

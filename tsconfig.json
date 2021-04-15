@@ -1,0 +1,18 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "module": "commonjs",
+        "noImplicitAny": true,
+        "sourceMap": true,
+        "mapRoot": "/out",
+        "outDir": "out",
+        "baseUrl": "./src",
+        "paths": {
+            "*": ["node_modules/*"]
+        },
+        "jsx": "react"
+    },
+    "include": [
+        "src/**/*"
+    ]
+}

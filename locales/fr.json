@@ -1,0 +1,41 @@
+{
+    "app-init-fetching-api": "Récupération des APIs...",
+    "app-init-listing-steam": "Listage des jeux Steam...",
+    "app-init-listing-oculus": "Listage des jeux Oculus...",
+    "app-init-listing-android": "Listage des jeux Android...",
+    "app-confirm-quit": "Un jeu est en cours d'installation.<br />Voulez vous vraiment quitter ?",
+
+    "api-fetching-mods": "Récupération des mods {0} depuis<br />{1}...",
+    "api-fetching-failed": "<span style='color: red;'>Échec de la récupération des mods {0} (E{1})</span>",
+
+    "games-listing-quest": "Listage des mods installés<br>depuis l'Oculus Quest ({0})",
+    "games-listing-quest2": "Listage des mods installés<br>depuis l'Oculus Quest 2 ({0})",
+    "games-listing-android": "Listage des mods installés<br>depuis l'appareil Android ({0})",
+
+    "button-install": "Installer /<br />Mettre à Jour",
+
+    "modspanel-nomodfound": "Aucun mod trouvé pour {0}.<br />Veuillez vérifier que vous avez correctement référancé l'API.",
+    "modspanel-confirm-uninstall": "Vous êtes sur le point de désinstaller {0}.<br>Voulez-vous continuer&nbsp;?",
+    "modspanel-failed-uninstall": "Échec de la désinstallation de {0}",
+    "modspanel-confirm-install": "Les mods suivants seront installés / mis à jour",
+    "modspanel-listing-mods": "Listage des mods...",
+
+    "not-implemented": "Non implémenté",
+    "continue": "Continuer",
+    "cancel": "Annuler",
+    "quit": "Quitter",
+
+    "mods": "Mods",
+    "settings": "Paramètres",
+
+    "game": "Jeu",
+    "no-game-selected": "Pas de jeu selectionné",
+    "add-game": "Ajouter un autre jeu...",
+
+    "install-downloading-ml": "Téléchargement de {0}",
+    "install-extracting-ml": "Décompression de {0}",
+    "install-downloading-mod": "Téléchargement du mod {0}",
+    "install-downloading-plugin": "Téléchargement du plugin {0}",
+    "install-download-failed": "Échec du téléchargement de {0}",
+    "install-extract-failed": "Échec de la décompression de {0}"
+}

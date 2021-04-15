@@ -1,0 +1,41 @@
+{
+    "app-init-fetching-api": "Fetching APIs...",
+    "app-init-listing-steam": "Listing Steam games...",
+    "app-init-listing-oculus": "Listing Oculus games...",
+    "app-init-listing-android": "Listing Android games...",
+    "app-confirm-quit": "A game is currently being installed.<br />Do you really want to quit?",
+
+    "api-fetching-mods": "Fetching {0}'s mods from<br />{1}...",
+    "api-fetching-failed": "<span style='color: red;'>Failed to fetch {0}'s mods (E{1})</span>",
+
+    "games-listing-quest": "Listing installed games<br>from Oculus Quest ({0})",
+    "games-listing-quest2": "Listing installed games<br>from Oculus Quest 2 ({0})",
+    "games-listing-android": "Listing installed games<br>from Android device ({0})",
+
+    "button-install": "Install / Update",
+
+    "modspanel-nomodfound": "No mods found for {0}.<br />Make sure you have registered the API correctly.",
+    "modspanel-confirm-uninstall": "You are about to uninstall {0}.<br>Do you want to continue?",
+    "modspanel-failed-uninstall": "Failed to uninstall {0}",
+    "modspanel-confirm-install": "The following mods will be installed/updated",
+    "modspanel-listing-mods": "Listing mods...",
+
+    "not-implemented": "Not implemeted",
+    "continue": "Continue",
+    "cancel": "Cancel",
+    "quit": "Quit",
+
+    "mods": "Mods",
+    "settings": "Settings",
+
+    "game": "Game",
+    "no-game-selected": "No game selected",
+    "add-game": "Add another game...",
+
+    "install-downloading-ml": "Downloading {0}",
+    "install-extracting-ml": "Extracting {0}",
+    "install-downloading-mod": "Downloading mod {0}",
+    "install-downloading-plugin": "Downloading plugin {0}",
+    "install-download-failed": "Failed to download {0}",
+    "install-extract-failed": "Failed to extract {0}"
+}

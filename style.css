@@ -1,0 +1,517 @@
+:root {
+    --interactive-normal: #b9bbbe;
+}
+
+@font-face {
+    font-family: jaapokki-regular;
+    src: url("res/fonts/jaapokki-regular/jaapokki-regular.eot"),
+        url("res/fonts/jaapokki-regular/jaapokki-regular.woff") format('woff'),
+        url("res/fonts/jaapokki-regular/jaapokki-regular.svg") format('svg'),
+        url("res/fonts/jaapokki-regular/jaapokki-regular.ttf") format('truetype');
+}
+
+
+
+html {
+    display: block;
+    color: white;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+html, body, #root, #app {
+    height: 100%;
+    width: 100%;
+}
+
+/* html {
+    height: calc(100% - 4px);
+} */
+
+a, abbr, acronym, address, applet, big, blockquote, body, caption, cite, code, dd, del, dfn, div, dl, dt, em, fieldset, form, h1, h2, h3, h4, h5, h6, html, iframe, img, ins, kbd, label, legend, li, object, ol, p, pre, q, s, samp, small, span, strike, strong, table, tbody, td, tfoot, th, thead, tr, tt, ul, var {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-weight: inherit;
+    font-style: inherit;
+    font-size: 100%;
+    vertical-align: baseline;
+}
+
+body {
+    background-color: #202225;
+    position: relative;
+}
+
+.titlebar {
+    height: 22px;
+    margin-top: 4px;
+    display: flex;
+
+    flex-shrink: 0;
+    -webkit-app-region: drag;
+
+    flex-direction: row-reverse;
+}
+
+.window-title {
+    font-family: jaapokki-regular;
+    font-size: 42px;
+
+    top: 10px;
+
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+.window-title > .green {
+    color: rgb(120, 248, 99);
+}
+
+.window-title > .red {
+    color: rgb(255, 59, 106);
+}
+
+.winbutton {
+    position: relative;
+    cursor: pointer;
+    width: 42px;
+    height: 42px;
+    pointer-events: auto;
+    -webkit-app-region: no-drag;
+
+    justify-content: center;
+    align-items: center;
+    display: flex;
+
+    color: var(--interactive-normal);
+
+    z-index: 2;
+}
+
+.closebutton:hover {
+    background-color: #f04747
+}
+
+.mainpanel {
+    background-color: #1f1f1f;
+    height: calc(100% - 110px);
+
+    display: flex;
+    flex-direction: row;
+}
+
+
+
+/* HEAD */
+
+.head {
+    display: flex;
+    justify-content: space-between;
+
+    -webkit-app-region: drag;
+
+    height: 110px;
+    background-color: #0d0d0d;
+}
+
+.head-nav {
+    display: flex;
+    flex-direction: row;
+    bottom: 0px;
+    align-self: flex-end
+}
+
+.head-button {
+    width: 160px;
+    height: 45px;
+    align-content: center;
+    text-align: center;
+    font-size: 24px;
+    position: relative;
+
+    pointer-events: auto;
+    user-select: none;
+    cursor: pointer;
+
+    -webkit-app-region: no-drag;
+
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+.head-button > .underline {
+    background-color: transparent;
+    height: 3px;
+    bottom: 0px;
+    left: 5px;
+    right: 5px;
+    position: absolute;
+}
+
+.head-button:hover > .underline {
+    background-color: rgba(131, 131, 131, 1);
+}
+
+.head-button.selected > .underline {
+    background-color: rgba(51, 202, 5, 1);
+}
+
+.head-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+.game-select {
+    display: flex;
+    align-items: center;
+    
+    user-select: none;
+}
+
+.dropdown-game {
+    width: 200px;
+    height: 40px;
+    padding-left: 15px;
+    margin-left: 15px;
+    display: flex;
+    align-items: center;
+    background-color: #303030;
+
+    pointer-events: auto;
+    cursor: pointer;
+    -webkit-app-region: no-drag;
+}
+
+.panel {
+    display: flex;
+    width: 100%;
+}
+
+.panel:not(.selected) {
+    display: none;
+}
+
+
+/* Mods panel */
+
+#panel-mods {
+    flex-direction: column;
+}
+
+.panel-mods-header {
+    background-color: #131313;
+    padding: 8px;
+    top: 10px;
+    margin: 10px;
+    height: 20px;
+}
+
+#panel-mods-content {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1;
+    overflow-y: scroll;
+    justify-content: center;
+}
+
+/*
+#panel-mods-content::-webkit-scrollbar {
+    display: none;
+}
+*/
+
+.panel-mods-error {
+    align-self: center;
+    width: 100%;
+    text-align: center;
+    font-size: 22px;
+    transform: translate(0, -60px);
+}
+
+.panel-mods-footer {
+    width: 100%;
+    height: 70px;
+    background-color: #0d0d0d;
+    display: flex;
+}
+
+
+.loading-container {
+    width: calc(100% - 200px);
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+/* loading bar */
+
+.progress {
+    width: 100%;
+    height: 22px;
+    margin: 13px;
+    background-color: #333333;
+    color: #dcddde;
+    position: relative;
+}
+.progress:before {
+    content: attr(data-label);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.progress .progress-value {
+    background-color: #ff3b6a;
+    display: inline-block;
+    height: 100%;
+}
+
+/* Install button */
+
+#install-button {
+    width: 160px;
+    height: calc(100% - 26px);
+    margin: 13px;
+    background-color: rgb(6, 162, 252);
+
+    font-size: 18px;
+    letter-spacing: 0.02em;
+
+    color: inherit;
+    border: none;
+}
+
+#install-button:hover {
+    background-color: rgb(32, 192, 255);
+}
+
+#install-button:active {
+    background-color: rgb(50, 139, 255)
+}
+
+#install-button:disabled {
+    background-color: rgb(95, 95, 95);
+}
+
+#install-button:focus {
+    outline: none;
+}
+
+/* loading overlay */
+
+#lock-pane {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+
+    z-index: 1;
+}
+
+.loading-overlay {
+    display: flex;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+
+    user-select: none;
+
+    align-items: center;
+    justify-content: space-around;
+
+    font-size: 26px;
+    text-align: center;
+}
+
+.background-overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+
+    background-color: rgba(53, 53, 53, 0.3);
+
+    z-index: 1;
+}
+
+/* right panel */
+
+.dropdown-game-dropdown {
+    position: absolute;
+    right: 0px;
+    width: 300px;
+    background-color: #101010;
+    overflow-x: hidden;
+    top: 110px;
+    max-height: calc(100% - 110px);
+    overflow-y: auto;
+}
+
+.dropdown-title {
+    margin-bottom: 10px;
+}
+
+.dropdown-path {
+    font-size: 10px;
+    color: #606060;
+    white-space: nowrap;
+}
+
+.dropdown-game-element {
+    padding: 10px;
+}
+
+.dropdown-game-element:hover {
+    background-color: #303030;
+}
+
+.dropdown-game-element:not(:last-child) {
+    border-bottom: 1px solid #303030;
+}
+
+.dropdown-game > .dropdown-game-dropdown {
+    display: flex;
+    flex-direction: column;
+}
+
+#dropdown-game-selected-title {
+    pointer-events: none;
+}
+
+/* mod boxes */
+
+.mod-box {
+    /*
+    width: 320px;
+    height: 150px;
+    */
+    width: 280px;
+    height: 130px;
+    background-color: #131313;
+    margin: 10px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    cursor: pointer;
+}
+
+.mod-box.checked {
+    border: 2px;
+    border-color: gray;
+    border-style: dashed;
+    padding: 13px;
+}
+
+.mod-box.installed {
+    border-bottom: 3px solid #1ad61a;
+    padding-bottom: 12px;
+}
+
+.mod-box.outdated {
+    border-bottom: 3px solid #ffe818;
+    padding-bottom: 12px;
+}
+
+.mod-box-title {
+    margin: 5px;
+    font-size: 18px;
+    font-weight: 300;
+}
+
+.mod-box-author {
+    color: #8a8a8a;
+    text-align: right;
+    font-size: 13px;
+}
+
+/* Confirmation popup */
+
+#confirmation-popup {
+    position: fixed;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.confirmation-popup-box {
+    width: 500px;
+    background-color: #131313;
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+}
+
+#confirmation-popup-content {
+    margin: 15px;
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.confirmation-popup-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.confirmation-popup-buttons.inverted {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-start;
+}
+
+.popup-error {
+    border: 2px solid #ff0000;
+}
+
+
+/* Confirmation button */
+
+.confirmation-button {
+    padding: 0px 15px;
+    height: 35px;
+    margin-left: 15px;
+
+    background-color: rgb(6, 162, 252);
+
+    color: inherit;
+    border: none;
+}
+
+.confirmation-button:hover {
+    background-color: rgb(32, 192, 255);
+}
+
+.confirmation-button:active {
+    background-color: rgb(50, 139, 255)
+}
+
+.confirmation-button:disabled {
+    background-color: rgb(95, 95, 95);
+}
+
+.confirmation-button:focus {
+    outline: none;
+}
+
+/* Scrollbar */
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #4e4e4e;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #747474;
+}

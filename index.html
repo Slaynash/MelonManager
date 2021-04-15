@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="style.css"/>
+    </head>
+    <div id="lock-pane" style="display: none"></div>
+    <div class="background-overlay" id="background-overlay">
+        <div class="loading-overlay" id="loading-overlay">
+            Loading...
+        </div>
+        <!-- overlays -->
+    </div>
+    <body>
+        <div class="head" style="height: 110px; background-color: #0d0d0d;">
+            <div class="head-nav">
+                <div class="head-button" id="button-mods">
+                    Mods
+                    <div class="underline"></div>
+                </div>
+                <div class="head-button" id="button-settings">
+                    Settings
+                    <div class="underline"></div>
+                </div>
+            </div>
+
+            <div class="window-title" style="position: absolute; left: 50%; transform: translate(-50%, 0);">
+                <span class="green">Melon</span><span class="red">Manager</span>
+            </div>
+
+            <div class="head-right">
+                <div class="winbutton closebutton" aria-label="Close" role="button" id="closebutton">
+                    <svg aria-hidden="false" width="24" height="24" viewBox="0 0 12 12">
+                        <polygon fill="currentColor" fill-rule="evenodd" points="11 1.576 6.583 6 11 10.424 10.424 11 6 6.583 1.576 11 1 10.424 5.417 6 1 1.576 1.576 1 6 5.417 10.424 1" />
+                    </svg>
+                </div>
+
+                <div class="game-select" id="dropdown-game-title">
+                    Game:
+                    <div class="dropdown-game">
+                        <span id="dropdown-game-selected-title">No game selected</span>
+                        <div class="dropdown-game-dropdown" id="dropdown-game-container" style="display: none;">
+                            <!-- Autofilled -->
+                            <div class="dropdown-game-element" id="dropdown-add-another-game">Add another game...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mainpanel" style="display: flex; flex-direction: row;">
+            <div class="panel" id="panel-mods">
+                <div class="panel-mods-header">
+                    <!-- TODO mods panel header-->
+                </div>
+                <div id="panel-mods-content">
+                    <div class="panel-mods-error">No game selected</div>
+                </div>
+                <div class="panel-mods-footer">
+                    <div class="loading-container">
+                        <div class="progress" id="progress-bar" data-label=""><span class="progress-value" style="width: 0%"></span></div>
+                    </div>
+                    <button id="install-button" disabled>Install / Update</button>
+                </div>
+            </div>
+            <div class="panel" id="panel-settings">
+                <!-- TODO settings panel -->
+            </div>
+        </div>
+    </body>
+</html>
