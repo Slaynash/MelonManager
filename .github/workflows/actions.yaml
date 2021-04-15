@@ -19,7 +19,7 @@ jobs:
       - name: Setup MSBuild.exe
         uses: microsoft/setup-msbuild@v1.0.2
       - name: Build with MSBuild
-        run: msbuild MelonManagerUtils.sln -p:Configuration=Release -p:Platform=x64
+        run: msbuild MelonManagerUtils.sln -p:Configuration=Release -p:Platform=Any CPU
 
       - name: Upload dotnet artifact
         uses: actions/upload-artifact@v2
