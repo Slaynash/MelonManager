@@ -7,4 +7,5 @@ MelonManagerUtils/bin/
 MelonManagerUtils/obj/
 
 MelonManagerUtils.exe
-*.dll
+MelonManagerUtils.pdb
+/*.dll

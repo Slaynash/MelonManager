@@ -32,8 +32,18 @@ namespace MelonManagerUtils
                     string gameexe = Directory.GetFiles(path, "*.exe").FirstOrDefault(f => Directory.Exists(f.Substring(0, f.Length - 4) + "_Data"));
                     if (gameexe != null)
                     {
-                        string gamename = gameexe.Split(new[] { Path.DirectorySeparatorChar }).Last();
-                        gamename = gamename.Substring(0, gamename.Length - 4);
+                        string exename = gameexe.Split(new[] { Path.DirectorySeparatorChar }).Last();
+                        exename = exename.Substring(0, exename.Length - 4);
+
+                        string gamename = exename;
+
+                        try
+                        {
+                            string[] appinfo = File.ReadAllLines(Path.Combine(path, exename + "_Data", "app.info"));
+                            gamename = appinfo[1];
+                            //Console.WriteLine("gamename: " + gamename);
+                        }
+                        catch (Exception) { }
 
                         // https://github.com/LavaGang/MelonLoader.Installer/blob/4222e25152991347777cddb2a354b56e4953cdbc/MainForm.cs#L101-L106
                         byte[] exedata = File.ReadAllBytes(gameexe);
