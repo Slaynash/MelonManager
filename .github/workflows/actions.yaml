@@ -1,11 +1,11 @@
-name: MelonManager
+name: build
 
 on:
   push:
     branches: [ main ]
 
 jobs:
-  build_dotnet:
+  dotnet:
     runs-on: windows-latest
 
     steps:
@@ -19,7 +19,7 @@ jobs:
       - name: Setup MSBuild.exe
         uses: microsoft/setup-msbuild@v1.0.2
       - name: Build with MSBuild
-        run: msbuild MelonManagerUtils.sln -p:Configuration=Release -p:Platform=Any CPU
+        run: msbuild MelonManagerUtils.sln -p:Configuration=Release -p:Platform=AnyCPU
 
       - name: Upload dotnet artifact
         uses: actions/upload-artifact@v2
@@ -27,7 +27,7 @@ jobs:
           name: dotnet_files
           path: MelonManagerUtils/bin/Release
   
-  build_node:
+  node:
     runs-on: windows-latest
 
     steps:
