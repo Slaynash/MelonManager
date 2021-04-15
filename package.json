@@ -5,6 +5,7 @@
   "scripts": {
     "start": "electron ./out/main.js"
   },
+  "main": "./out/main.js",
   "author": "Slaynash",
   "license": "Apache-2.0",
   "dependencies": {

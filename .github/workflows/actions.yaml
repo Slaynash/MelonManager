@@ -70,7 +70,7 @@ jobs:
           sudo sudo chmod -R 777 electron/
           cp -R locales/ platform-tools/ electron/
           mkdir electron/resources/app
-          cp -R index.html style.css res/ electron/resources/app/
+          cp -R index.html style.css package.json package-lock.json res/ electron/resources/app/
 
       - name: Download dotnet artifact
         uses: actions/download-artifact@v2
