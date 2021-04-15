@@ -51,6 +51,7 @@ jobs:
 
   pack_windows:
     runs-on: linux-latest
+    needs: [ dotnet, node ]
 
     steps:
       - uses: actions/checkout@v2
