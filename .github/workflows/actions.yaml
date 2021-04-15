@@ -81,7 +81,8 @@ jobs:
       - name: Download nodejs artifact
         uses: actions/download-artifact@v2
         with:
-          name: electron/resources/app/out
+          name: nodejs_files
+          path: electron/resources/app/out
 
       - name: Setup Node.js 14
         uses: actions/setup-node@v2
