@@ -67,6 +67,7 @@ jobs:
 
       - name: copy files
         run: |
+          sudo sudo chmod -R 777 electron/
           cp -R locales/ platform-tools/ electron/
           mkdir electron/resources/app
           cp -R index.html style.css res/ electron/resources/app/
