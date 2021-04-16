@@ -10,4 +10,5 @@ export interface RemoteMod {
     hash: string;
     type: string;
     size: number;
+    dependencies: string[];
 }

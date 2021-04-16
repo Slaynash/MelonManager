@@ -30,6 +30,7 @@ export class ApisManager {
                 downloadUrl: "versions[0].downloadlink",
                 modtype: "versions[0].modtype",
                 modsize: undefined, //"versions[0].filesize"
+                dependencies: undefined,
                 compareUsingHashes: false,
                 filter: "versions[0].ApprovalStatus==1",
                 mlversion: "0.3.0"
@@ -50,6 +51,7 @@ export class ApisManager {
                 downloadUrl: "Download[0].browser_download_url",
                 modtype: undefined,
                 modsize: undefined,
+                dependencies: undefined,
                 compareUsingHashes: false,
                 filter: undefined,
                 mlversion: "0.2.7.4"
@@ -70,6 +72,7 @@ export class ApisManager {
                 downloadUrl: "Download.browser_download_url",
                 modtype: undefined,
                 modsize: undefined,
+                dependencies: "Dependencies",
                 compareUsingHashes: false,
                 filter: undefined,
                 mlversion: "0.2.7.4"
@@ -90,6 +93,7 @@ export class ApisManager {
                 downloadUrl: "DownloadUrl",
                 modtype: undefined,
                 modsize: undefined,
+                dependencies: undefined,
                 compareUsingHashes: false,
                 filter: undefined,
                 mlversion: "0.3.0"
@@ -111,6 +115,7 @@ export class ApisManager {
                 downloadUrl: undefined,
                 modtype: undefined,
                 modsize: undefined,
+                dependencies: undefined,
                 compareUsingHashes: false,
                 filter: undefined,
                 mlversion: undefined
@@ -131,6 +136,7 @@ export class ApisManager {
                 downloadUrl: undefined,
                 modtype: undefined,
                 modsize: undefined,
+                dependencies: undefined,
                 compareUsingHashes: false,
                 filter: undefined,
                 mlversion: undefined
@@ -173,15 +179,16 @@ export class ApisManager {
                 apiData.mods.push({
                     name: this.getJsonPart(modIndex, modData, scheme.name),
                     version: this.getJsonPart(modIndex, modData, scheme.version),
-                    author: this.getJsonPart(modIndex, modData, scheme.author),
+                    author: this.getArray(this.getJsonPart(modIndex, modData, scheme.author), false),
                     description: this.getJsonPart(modIndex, modData, scheme.description),
-                    tags: this.getArray(this.getJsonPart(modIndex, modData, scheme.tags)),
+                    tags: this.getArray(this.getJsonPart(modIndex, modData, scheme.tags), true),
                     banner: this.getJsonPart(modIndex, modData, scheme.banner),
                     url: this.getJsonPart(modIndex, modData, scheme.downloadUrl),
-                    aliases: this.getArray(this.getJsonPart(modIndex, modData, scheme.aliasesArray)),
+                    aliases: this.getArray(this.getJsonPart(modIndex, modData, scheme.aliasesArray), true),
                     hash: this.getJsonPart(modIndex, modData, scheme.hash),
                     type: (this.getJsonPart(modIndex, modData, scheme.modtype) || "mod").toLowerCase(),
-                    size: this.getJsonPart(modIndex, modData, scheme.modsize)
+                    size: this.getJsonPart(modIndex, modData, scheme.modsize),
+                    dependencies: this.getJsonPart(modIndex, modData, scheme.dependencies)
                 });
             }
         }
@@ -212,13 +219,17 @@ export class ApisManager {
         return ret;
     }
 
-    private static getArray(original: any): any {
+    private static getArray(original: any, splitOnComma: boolean): any {
         if (typeof original !== 'string')
             return original;
         
         let ret: string[] = [];
-        for (let element of original.split(','))
-            ret.push(element.trim());
+        if (splitOnComma) {
+            for (let element of original.split(','))
+                ret.push(element.trim());
+        }
+        else
+            ret.push(original);
 
         return ret;
     }

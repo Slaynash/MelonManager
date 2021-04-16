@@ -29,46 +29,7 @@ namespace MelonManagerUtils
 
                 foreach (string path in paths)
                 {
-                    string gameexe = Directory.GetFiles(path, "*.exe").FirstOrDefault(f => Directory.Exists(f.Substring(0, f.Length - 4) + "_Data"));
-                    if (gameexe != null)
-                    {
-                        string exename = gameexe.Split(new[] { Path.DirectorySeparatorChar }).Last();
-                        exename = exename.Substring(0, exename.Length - 4);
-
-                        string gamename = exename;
-
-                        try
-                        {
-                            string[] appinfo = File.ReadAllLines(Path.Combine(path, exename + "_Data", "app.info"));
-                            gamename = appinfo[1];
-                            //Console.WriteLine("gamename: " + gamename);
-                        }
-                        catch (Exception) { }
-
-                        // https://github.com/LavaGang/MelonLoader.Installer/blob/4222e25152991347777cddb2a354b56e4953cdbc/MainForm.cs#L101-L106
-                        byte[] exedata = File.ReadAllBytes(gameexe);
-                        if (exedata == null || exedata.Length <= 0) // Error
-                        {
-                            games.Add(new UnityGame()
-                            {
-                                name = gamename,
-                                path = path,
-                                error = "Failed to read the game executable"
-                            });
-                            continue;
-                        }
-
-                        bool x64 = BitConverter.ToUInt16(exedata, BitConverter.ToInt32(exedata, 60) + 4) == 34404;
-
-                        UnityGame game = new UnityGame()
-                        {
-                            name = gamename,
-                            path = path,
-                            arch = x64 ? "x64" : "x32"
-                        };
-
-                        games.Add(game);
-                    }
+                    ScanSteamGame(path, games);
                 }
 
                 Console.WriteLine(JsonConvert.SerializeObject(games));
@@ -145,6 +106,60 @@ namespace MelonManagerUtils
             }
 
             return 0;
+        }
+
+        private static bool ScanSteamGame(string path, List<UnityGame> games)
+        {
+            string gameexe = Directory.GetFiles(path, "*.exe").FirstOrDefault(f => Directory.Exists(f.Substring(0, f.Length - 4) + "_Data"));
+            if (gameexe != null)
+            {
+                string exename = gameexe.Split(new[] { Path.DirectorySeparatorChar }).Last();
+                exename = exename.Substring(0, exename.Length - 4);
+
+                string gamename = exename;
+
+                try
+                {
+                    string[] appinfo = File.ReadAllLines(Path.Combine(path, exename + "_Data", "app.info"));
+                    gamename = appinfo[1];
+                    //Console.WriteLine("gamename: " + gamename);
+                }
+                catch (Exception) { }
+
+                // https://github.com/LavaGang/MelonLoader.Installer/blob/4222e25152991347777cddb2a354b56e4953cdbc/MainForm.cs#L101-L106
+                byte[] exedata = File.ReadAllBytes(gameexe);
+                if (exedata == null || exedata.Length <= 0) // Error
+                {
+                    games.Add(new UnityGame()
+                    {
+                        name = gamename,
+                        path = path,
+                        error = "Failed to read the game executable"
+                    });
+                    return true;
+                }
+
+                bool x64 = BitConverter.ToUInt16(exedata, BitConverter.ToInt32(exedata, 60) + 4) == 34404;
+
+                UnityGame game = new UnityGame()
+                {
+                    name = gamename,
+                    path = path,
+                    arch = x64 ? "x64" : "x32"
+                };
+
+                games.Add(game);
+
+                return true;
+            }
+            else
+            {
+                foreach (string childDir in Directory.GetDirectories(path))
+                    if (ScanSteamGame(childDir, games, depth))
+                        return true;
+            }
+
+            return false;
         }
     }
 }

@@ -14,6 +14,7 @@ export interface ApiScheme {
     downloadUrl: string
     modtype: string
     modsize: string
+    dependencies: string
     compareUsingHashes: boolean
     filter: string
     mlversion: string
