@@ -155,7 +155,7 @@ namespace MelonManagerUtils
             else
             {
                 foreach (string childDir in Directory.GetDirectories(path))
-                    if (ScanSteamGame(childDir, games, depth))
+                    if (ScanSteamGame(childDir, games))
                         return true;
             }
 
